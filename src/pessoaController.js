@@ -14,6 +14,9 @@ async function connect(){
     global.connection = connection;
     return connection;
 }
+
+// =============================================================
+
 exports.get = async (req, res, next) => {
     //res.status(200).send('Rota GET!');
    const conn = await connect();
@@ -21,45 +24,55 @@ exports.get = async (req, res, next) => {
    res.status(200).send(rows);
 };
 
+// =============================================================
+
 exports.post = async (req, res, next) => {
     const conn = await connect();
-    let { nome, telefone } = req.body;
-    let sql = `INSERT INTO pessoa (nome, telefone) 
-               VALUES ('${nome}', '${telefone}')`;
-    await conn.query(sql);
+    let { nome, telefone, email } = req.body;
+    // let sql = `INSERT INTO pessoa (nome, telefone) 
+    //           VALUES ('${nome}', '${telefone}')`;
+    let sql = 'INSERT INTO pessoa (nome, telefone, email) VALUES (?, ?, ?)';
+    await conn.query(sql, [nome, telefone, email]);
     res.status(201).send(`{"resultado": true}`);
 };
+
+// =============================================================
   
 exports.put = async (req, res, next) => {
     const conn = await connect();
     let id = req.params.id;
-    let { nome, telefone } = req.body;
-    let sql = `UPDATE pessoa SET 
-               nome = '${nome}', telefone = '${telefone}'       
-               WHERE idpessoa = ${id}`;
-    await conn.query(sql);
+    let { nome, telefone, email } = req.body;
+    // let sql = `UPDATE pessoa SET 
+    //            nome = '${nome}', telefone = '${telefone}'       
+    //            WHERE idpessoa = ${id}`;
+    let sql = 'UPDATE pessoa SET nome = ?, telefone = ?, email = ? WHERE idpessoa = ?';
+    await conn.query(sql, [nome, telefone, email, id]);
     res.status(201).send(`{"resultado": true}`);
 };
+
+// =============================================================
   
 exports.delete = async (req, res, next) => {
     const conn = await connect();
     let id = req.params.id;
-    let { nome, telefone } = req.body;
-    let sql = `DELETE FROM pessoa
-               WHERE idpessoa = ${id}`;
-    await conn.query(sql);
+    // let { nome, telefone } = req.body;
+    let sql = `DELETE FROM pessoa WHERE idpessoa = ?`;
+    await conn.query(sql, [id]);
     res.status(201).send(`{"resultado": true}`);
 };
   
+// =============================================================
   
 exports.getById =async(req, res, next) => {
     let id = req.params.id;
     const conn = await connect();
-    const [rows] = await conn.query(`SELECT * FROM pessoa 
-        WHERE idpessoa = ${id}`);
+    let sql = 'SELECT * FROM pessoa WHERE idpessoa = ?';
+    const [rows] = await conn.query(sql, [id]);
     if (rows.length > 0) {
         res.status(200).send(rows[0]);
     } else {
         res.status(404).send(`{"resultado": false}`);
     }
 };
+
+// =============================================================
