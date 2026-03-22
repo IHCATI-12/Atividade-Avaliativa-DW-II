@@ -1,28 +1,38 @@
 <html>
-    <head>
-        <title>Exemplo</title>
-        <link rel="stylesheet" 
-           type="text/css"
-           href="index.css"/>
-    </head>
-    <body>
-        <h1>Exemplo</h1>
-        <button onclick="novo()">Novo</button>
-        <div id="conteudo">
 
+<head>
+    <title>Exemplo</title>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Cadastro de Pessoas</h1>
+        <button class="btn btn-primary mb-3" onclick="novo()">Novo Cadastro</button>
+
+        <div id="conteudo"></div>
+
+        <div id="formulario" style="display: none;" class="card p-4 shadow-sm">
+            <input type="hidden" id="txtid" />
+            <div class="mb-3">
+                <label class="form-label">Nome:</label>
+                <input type="text" class="form-control" id="txtnome" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Telefone:</label>
+                <input type="text" class="form-control" id="txttelefone" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email:</label>
+                <input type="email" class="form-control" id="txtemail" />
+            </div>
+            <button class="btn btn-success" onclick="salvar()">Salvar</button>
+            <button class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
         </div>
-        <div id="formulario" style="display: none;">
-            Nome:
-            <input type="text" id="txtnome"/>
-            <br/>
-            Telefone:
-            <input type="text" id="txttelefone"/>
-            <br/>
-            <button onclick="salvar()">Salvar</button>
-        </div>
+    </div>
 
+    <script src="index.js"></script>
+</body>
 
-
-        <script src="index.js"></script>
-    </body>
 </html>
