@@ -8,6 +8,15 @@ function novo() {
     document.getElementById("txtemail").value = "";
 }
 
+function cancelar() {
+    document.getElementById("conteudo").style.display = "block";
+    document.getElementById("formulario").style.display = "none";
+    document.getElementById("txtnome").value = "";
+    document.getElementById("txttelefone").value = "";
+    document.getElementById("txtemail").value = "";
+    listar()
+}
+
 async function salvar() {
     const pessoa = {
         nome: document.getElementById("txtnome").value,
