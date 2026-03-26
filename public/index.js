@@ -41,7 +41,7 @@ async function listar() {
     const dados = await resp.json();
 
     let tabela = `
-        <table class="table table-striped table-hover mt-3">
+        <table class="table table-striped table-hover align-middle mt-3">
             <thead class="table-dark">
                 <tr>
                     <th>Nome</th>
